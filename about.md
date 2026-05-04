@@ -11,19 +11,19 @@
 
 ## 1. One-line thesis
 
-**Harmony is an open-source, budget-aware agent runtime and project constitution system for AI-assisted software development.**
+**Harmony is an open-source, budget-aware AI development runtime and project constitution system meant to replace fragmented Codex, Claude Code, Cursor, and OpenCode-style workflows.**
 
-It exists to coordinate multiple AI models, coding agents, MCP tools, reusable Skills, permissions, project memory, design assets, review gates, and budget-aware routing into one structured development pipeline.
+It exists to coordinate multiple AI models, coding agents, MCP tools, reusable Skills, permissions, project memory, design assets, review gates, and budget-aware routing inside one governed runtime.
 
-The goal is not to create another AI chat UI or another Cursor/Codex/Claude Code clone.
+The goal is not to create a shallow clone of Cursor, Codex, Claude Code, or OpenCode.
 
-The goal is to stop AI-assisted development from becoming chaotic, repetitive, expensive, and context-blind.
+The goal is to replace the chaotic tool loop around them: repeated prompting, context rebuilding, permission guessing, manual model picking, disconnected reviews, and expensive agent runs that should have been routed or validated differently.
 
 ---
 
 ## 2. Why this exists
 
-Current AI development harnesses and coding tools are powerful, but they often waste money and time because they lack a persistent, organized project operating system.
+Current AI development harnesses and coding tools are powerful, but they should not be the center of the workflow. They often waste money and time because they lack a persistent, organized project operating system.
 
 Common issues:
 
@@ -39,7 +39,7 @@ Common issues:
 - There is no clear difference between planning, drafting, implementing, reviewing, and shipping.
 - AI tools are too agreeable and often reinforce bad ideas instead of challenging them.
 
-Harmony should solve this by making the project itself the center of gravity.
+Harmony should solve this by making the project itself the center of gravity and making agents/providers interchangeable execution backends.
 
 The project should contain its own memory, rules, artifacts, decisions, assets, task history, model-routing policy, and permissions.
 
@@ -208,9 +208,11 @@ Harmony is not:
 - a “use every model” gimmick
 - a tool that lets agents blindly modify code
 
-Harmony should integrate with official APIs, SDKs, CLIs, OpenRouter-style routers, local models, MCP servers, and code agents where appropriate.
+Harmony should use official APIs, SDKs, CLIs, OpenRouter-style routers, local models, MCP servers, and code agents where appropriate.
 
-But the real product is the orchestration layer:
+But those are execution backends, not the user-facing center of gravity.
+
+The real product is the replacement runtime:
 
 - project constitution
 - staged pipeline
