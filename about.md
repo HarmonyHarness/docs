@@ -648,19 +648,22 @@ For Harmony itself, a likely MVP stack:
 
 ```txt
 Language: TypeScript
-Runtime: Node.js
-CLI: Commander, oclif, or similar
+Primary surface: local-first web UI
+Frontend: Next.js static export + Tailwind + shadcn/ui + Zustand
+Runtime: Bun / Node-compatible local service for filesystem and model-adapter work
 Validation: Zod
 Config: YAML + JSON
 Storage: files first, SQLite later if needed
-Package manager: pnpm
-UI later: Vue + Vite + Tailwind + DaisyUI
+Package manager: Bun
+CLI: optional headless/admin surface later
 Architecture: local-first/hybrid
 ```
 
 The first version should not start as a heavy hosted SaaS.
 
-The first version should be a local-first CLI/project-folder system.
+The first version should be a local-first UI that creates and manages the `.harmony/` project brain directly.
+
+The CLI should not be the main product surface. It can exist later for scripting, CI, automation, and power-user escape hatches.
 
 ---
 
@@ -1448,20 +1451,23 @@ Do not start with the full SaaS.
 
 Do not start with every provider.
 
-Do not start with the web UI.
+Do not start with a CLI-only prototype.
 
-Start with the core local-first system.
+Start with the core local-first UI.
 
 ### MVP v0.1
 
 ```txt
-harmony init
-harmony council
-harmony stage identity
-harmony stage stack
-harmony stage structure
-harmony export-prompt
-harmony review
+Open/create project
+Run Idea Intake
+Run AI Council
+Edit Project Constitution
+Define Brand Identity
+Define Stack and Cost Model
+Define Structure
+Generate Tasks
+Export Prompts
+Review Outputs
 ```
 
 Creates:
@@ -1480,54 +1486,57 @@ Creates:
 
 ### MVP v0.2
 
-Add model registry and OpenRouter/direct API adapter.
+Add model registry and OpenRouter/direct API adapter inside the UI.
 
 ```txt
-harmony run council --budget cheap
-harmony run stage stack --model kimi
-harmony run review --model gpt
+Run council with selected budget mode
+Run stack planning with selected model role
+Run cross-model review from the review screen
 ```
 
 ### MVP v0.3
 
-Add permissions and audit log.
+Add permissions and audit log UI.
 
 ```txt
-harmony permissions check
-harmony audit list
+Review requested actions
+Approve or deny tool calls
+Inspect audit history
 ```
 
 ### MVP v0.4
 
-Add Skills.
+Add Skills management.
 
 ```txt
-harmony skill install landing-page-review
-harmony skill run landing-page-review
+Install Skill
+Inspect required inputs and permissions
+Run Skill against the active project
 ```
 
 ### MVP v0.5
 
-Add MCP support.
+Add MCP support through connection and permission screens.
 
 ```txt
-harmony mcp add filesystem
-harmony mcp list-tools
-harmony mcp permissions
+Connect MCP server
+List exposed tools/resources
+Assign stage-scoped permissions
 ```
 
 ### MVP v0.6
 
-Add code-agent adapters.
+Add code-agent adapters controlled from the UI.
 
 ```txt
-harmony run implementation --agent codex
-harmony run implementation --agent opencode --model kimi
+Run implementation task with selected agent adapter
+Inspect diff, logs, cost, and validation output
+Accept, reject, or escalate
 ```
 
 ### Later
 
-- local web dashboard
+- CLI/headless automation
 - image pipeline
 - asset manifest UI
 - GitHub PR creation
@@ -1538,32 +1547,34 @@ harmony run implementation --agent opencode --model kimi
 
 ---
 
-## 32. Suggested initial commands
+## 32. Suggested initial UI flow
 
 ```txt
-harmony init
-harmony council
-harmony plan
-harmony brand
-harmony stack
-harmony structure
-harmony tasks
-harmony run
-harmony review
-harmony audit
+Open Harmony
+Create or select project
+Idea Intake
+AI Council
+Plan
+Brand
+Stack
+Structure
+Tasks
+Run
+Review
+Audit
 ```
 
 Example flow:
 
 ```txt
-harmony init "New SaaS landing page"
-harmony council
-harmony brand
-harmony stack
-harmony structure
-harmony tasks generate
-harmony run task home-hero --budget balanced
-harmony review
+Create project: New SaaS landing page
+Run council
+Lock brand direction
+Lock stack
+Define structure
+Generate tasks
+Run task: home hero, budget balanced
+Review result
 ```
 
 ---
@@ -1575,8 +1586,9 @@ Suggested monorepo:
 ```txt
 harmony/
   apps/
-    cli/
     web/
+    local-runtime/
+    cli/              # optional later headless surface
 
   packages/
     core/
@@ -1632,7 +1644,9 @@ This idea can easily become too large.
 
 The MVP must focus on the project constitution, staged artifacts, model routing, and permission foundations.
 
-Avoid trying to support every provider, every image tool, full code execution, and a polished UI at the same time.
+Avoid trying to support every provider, every image tool, full code execution, cloud sync, and team features at the same time.
+
+The UI is not a later polish layer. It is the product surface and must exist from the first useful version.
 
 ### 34.2 Adapter maintenance
 
@@ -1675,13 +1689,15 @@ Validation and cross-model review are what make them safe.
 ## 35. Open questions
 
 - Should the project name be `Harmony`, `harmony-ai`, `harmony-dev`, or something more unique for package discovery?
-- Should the CLI command be `harmony`, `hy`, or something else?
 - Should `.harmony/` be the project folder name?
 - Should the core be TypeScript from day one?
+- Should the first UI ship as a local web app, desktop app shell, or both?
+- What minimum local runtime is needed for filesystem access, model adapters, and validation?
+- What headless/CLI commands are needed later for CI and automation?
 - Should Skills follow Codex-style `SKILL.md` conventions directly or use a Harmony-specific `skill.yaml` wrapper?
 - How much should MCP support exist in v0.1 versus v0.5?
 - Should the first model adapter be OpenRouter because it gives access to many models quickly?
-- Should there be a manual prompt-export workflow before direct API execution?
+- Should there be a UI prompt-export workflow before direct API execution?
 - How strict should the AI Council gate be by default?
 - What are the first three real projects to test Harmony on?
 
@@ -1694,10 +1710,10 @@ The best first milestone is not “build the entire harness.”
 The best first milestone is:
 
 ```txt
-Create a local-first CLI that initializes a .harmony/ project brain, runs an AI Council viability pass, generates a project constitution, and exports structured prompts/tasks for external agents.
+Create a local-first UI that opens a repo, initializes a .harmony/ project brain, runs an AI Council viability pass, generates a project constitution, and exports structured prompts/tasks for external agents.
 ```
 
-This proves the core concept before deep automation.
+This proves the core concept before deep automation or provider sprawl.
 
 Minimum useful output:
 
@@ -1747,6 +1763,6 @@ It should reserve expensive models for judgment and review.
 
 It should make every important decision explicit and persistent.
 
-The first version should be built for personal use, local-first, CLI-first, and open-source.
+The first version should be built for personal use, local-first, UI-first, and open-source.
 
 The long-term vision is a serious AI development runtime that makes agentic coding cheaper, safer, more organized, and more reproducible.
