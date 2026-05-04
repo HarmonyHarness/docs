@@ -75,6 +75,14 @@ The UI is not decoration. It is where the developer sees the project state, unde
 
 An automation surface can come later for scripting and release workflows. It should not define the product.
 
+## Brand Direction
+
+Harmony should feel like a native developer product, not a generic AI startup.
+
+The brand should be compact, deliberate, and controlled. The current direction uses a strong monogram, restrained contrast, and a wordmark that gives the product more identity than another abstract assistant interface.
+
+The visual language should avoid generic AI gradients, fake futuristic dashboards, soft SaaS decoration, and meaningless product imagery.
+
 ## Local First
 
 Harmony should start as a local-first tool.
